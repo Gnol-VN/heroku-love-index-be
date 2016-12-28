@@ -1,10 +1,7 @@
 package uet.k59t.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uet.k59t.controller.dto.UserDTO;
 import uet.k59t.model.User;
 import uet.k59t.service.UserService;
@@ -17,8 +14,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //create User
     @RequestMapping(value = "user", method = RequestMethod.POST)
-    public User createUser(@RequestBody UserDTO userDTO){
+    public UserDTO createUser(@RequestBody UserDTO userDTO){
         return userService.createUser(userDTO);
+    }
+
+    //find User by id
+    @RequestMapping(value = "getuser", method = RequestMethod.GET)
+    public UserDTO findUser(@PathVariable("user_id") Long id){
+        return userService.getUserById(id);
     }
 }
