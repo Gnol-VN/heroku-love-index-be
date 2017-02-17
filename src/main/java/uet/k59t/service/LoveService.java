@@ -11,6 +11,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import uet.k59t.controller.dto.LoveDTO;
+import uet.k59t.controller.dto.ResultDTO;
 
 import java.util.Arrays;
 
@@ -19,7 +20,7 @@ import java.util.Arrays;
  */
 @Service
 public class LoveService {
-    public String postLoveIndex(LoveDTO loveDTO){
+    public ResultDTO postLoveIndex(LoveDTO loveDTO){
         //Post with body
         RestTemplate rest = new RestTemplate();
         rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
@@ -45,7 +46,10 @@ public class LoveService {
         Document document = Jsoup.parse(html);
         Elements divs = document.select("div");
         String score = divs.get(2).ownText();
-        String comment = document.select("p").get(0).ownText();
-        return "Result: "+comment+"\nScore: "+ score;
+        String comment = document.select("div div p").get(0).ownText();
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setComment(comment);
+        resultDTO.setScore(score);
+        return resultDTO;
     }
 }
