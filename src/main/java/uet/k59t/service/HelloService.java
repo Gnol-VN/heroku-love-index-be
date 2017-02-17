@@ -24,27 +24,21 @@ import java.util.Arrays;
 public class HelloService {
 
     public String sayHello(String s){
-        //Post with body
-        RestTemplate rest = new RestTemplate();
-        rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-        params.set("rapide_annee[0]", "96");
-        params.set("rapide_annee[1]", "96");
-        params.set("rapide_jour[0]", "14");
-        params.set("rapide_jour[1]", "24");
-        params.set("rapide_mois[0]", "10");
-        params.set("rapide_mois[1]", "2");
-        params.set("rapide_prenom[0]", "long");
-        params.set("rapide_prenom[1]", "e");
-        params.set("partenaire", "9999");
-        params.set("lang", "en");
-        ResponseEntity<String> st = rest.postForEntity("http://www.astrotheme.fr/partenaires/indice_rapide.php", params, String.class);
-        String html = st.getBody();
 
-        Document document = Jsoup.parse(html);
-        Elements divs = document.select("div");
-        String score = divs.get(2).ownText();
-        String comment = document.select("p").get(0).ownText();
+
+
+        //Get
+//        RestTemplate rest = new RestTemplate();
+//		URIBuilder builder = new URIBuilder("http://kenh14.vn/"); //$NON-NLS-1$
+//
+//		builder.addParameter("response_type" //$NON-NLS-1$
+//				, "code"); //$NON-NLS-1$
+//		builder.addParameter("grant_type", //$NON-NLS-1$
+//				"authorization_code"); //$NON-NLS-1$
+//
+//		URI url = new URI(builder.toString());
+//
+//		ResponseEntity<String> response = rest.getForEntity(url, String.class);
         return "Hello, " +s;
     }
 }
