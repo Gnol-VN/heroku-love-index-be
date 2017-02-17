@@ -52,4 +52,54 @@ public class LoveService {
         resultDTO.setScore(score);
         return resultDTO;
     }
+
+    public String findLover(LoveDTO loveDTO) {
+        RestTemplate restTemplate = new RestTemplate();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        String user0Name = loveDTO.getName0();
+        String user0Day = loveDTO.getDay0();
+        String user0Month = loveDTO.getMonth0();
+        String user0Year = loveDTO.getYear0();
+
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 31; j++) {
+                try{
+                    params.clear();
+                    params.set("rapide_annee[0]", loveDTO.getYear0());
+                    Integer day0 = Integer.parseInt(loveDTO.getDay0()) -1;
+                    params.set("rapide_jour[0]", day0.toString());
+                    Integer month0 = Integer.parseInt(loveDTO.getMonth0()) -1;
+                    params.set("rapide_mois[0]", month0.toString());
+                    params.set("rapide_prenom[0]", loveDTO.getName0());
+
+                    params.set("rapide_prenom[1]", loveDTO.getName1());
+                    params.set("rapide_jour[1]", String.valueOf(j));
+                    params.set("rapide_mois[1]", String.valueOf(i));
+                    params.set("rapide_annee[1]", "96");
+
+                    params.set("partenaire", "9999");
+                    params.set("lang", "en");
+                    ResponseEntity<String> st = restTemplate.postForEntity("http://www.astrotheme.fr/partenaires/indice_rapide.php", params, String.class);
+                    String html = st.getBody();
+
+                    Document document = Jsoup.parse(html);
+                    Elements divs = document.select("div");
+                    String score = divs.get(2).ownText();
+                    String comment = document.select("div div p").get(0).ownText();
+                    if(Integer.parseInt(score) > 90) {
+                        int day = j+1;
+                        int month = i+1;
+                        System.out.println("day: "+ day +" month: "+month + " score: "+score);
+                    }
+                }
+                catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+
+            }
+
+        }
+        System.out.println("Done crawling :)");
+        return null;
+    }
 }

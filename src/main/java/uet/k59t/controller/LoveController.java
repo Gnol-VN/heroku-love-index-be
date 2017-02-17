@@ -20,4 +20,8 @@ public class LoveController {
     public ResultDTO postLoveIndex(@RequestBody LoveDTO loveDTO){
         return loveService.postLoveIndex(loveDTO);
     }
+    @RequestMapping(value = "/findlover", method = RequestMethod.POST)
+    public String findLover(@RequestBody LoveDTO loveDTO){
+        return loveService.findLover(loveDTO);
+    }
 }
