@@ -39,8 +39,8 @@
         <!-- 2. Thêm driver cho database tương ứng -->
         <!-- Database Driver for MySQL 5 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 

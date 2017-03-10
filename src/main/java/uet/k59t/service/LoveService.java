@@ -89,11 +89,13 @@ public class LoveService {
                     if(Integer.parseInt(score) > 90) {
                         int day = j+1;
                         int month = i+1;
-                        System.out.println("day: "+ day +" month: "+month + " score: "+score);
+                        System.out.println("month: "+ month +" day: "+day + " score: "+score);
                     }
                 }
                 catch (Exception e){
-                    System.out.println(e.getMessage());
+                    int day = j+1;
+                    int month = i+1;
+                    System.out.println(e.getMessage()+"with day: "+ j+ " month: "+i);
                 }
 
             }
