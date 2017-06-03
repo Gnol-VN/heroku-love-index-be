@@ -3,6 +3,7 @@ package uet.k59t.service;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -12,6 +13,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import uet.k59t.controller.dto.LoveDTO;
 import uet.k59t.controller.dto.ResultDTO;
+import uet.k59t.model.Love;
+import uet.k59t.repository.LoveRepository;
 
 import java.util.Arrays;
 
@@ -20,7 +23,14 @@ import java.util.Arrays;
  */
 @Service
 public class LoveService {
+    @Autowired
+    private LoveRepository loveRepository;
+
     public ResultDTO postLoveIndex(LoveDTO loveDTO){
+        //Save love details to database
+        Love love = new Love(loveDTO);
+        loveRepository.save(love);
+
         //Post with body
         RestTemplate rest = new RestTemplate();
         rest.setMessageConverters(Arrays.asList(new StringHttpMessageConverter(), new FormHttpMessageConverter()));
