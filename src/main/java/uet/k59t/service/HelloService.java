@@ -39,6 +39,6 @@ public class HelloService {
 //		URI url = new URI(builder.toString());
 //
 //		ResponseEntity<String> response = rest.getForEntity(url, String.class);
-        return "Hello, you typed:  " +s;
+        return "Hello, lastlast you typed:  " +s;
     }
 }
