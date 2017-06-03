@@ -40,7 +40,7 @@ public class LoveService {
         params.set("rapide_prenom[1]", loveDTO.getName1());
         params.set("partenaire", "9999");
         params.set("lang", "en");
-        ResponseEntity<String> st = rest.postForEntity("http://www.astrotheme.fr/partenaires/indice_rapide.php", params, String.class);
+        ResponseEntity<String> st = rest.postForEntity("https://www.astrotheme.fr/partenaires/indice_rapide.php", params, String.class);
         String html = st.getBody();
 
         Document document = Jsoup.parse(html);
