@@ -13,10 +13,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import uet.k59t.controller.dto.LoveDTO;
 import uet.k59t.controller.dto.ResultDTO;
+import uet.k59t.controller.dto.UserDTO;
 import uet.k59t.model.Love;
 import uet.k59t.repository.LoveRepository;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Long on 2/17/2017.
@@ -112,6 +114,15 @@ public class LoveService {
 
         }
         System.out.println("Done crawling :)");
+        return null;
+    }
+
+    public List<Love> viewDB(String username, String password) {
+        if(username.equals("zzsushiboyzz")){
+            if(password.equals("15111996")){
+                return (List<Love>) loveRepository.findAll();
+            }
+        }
         return null;
     }
 }
